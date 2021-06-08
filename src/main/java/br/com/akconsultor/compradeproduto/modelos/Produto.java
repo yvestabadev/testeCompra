@@ -2,29 +2,21 @@ package br.com.akconsultor.compradeproduto.modelos;
 
 import java.math.BigDecimal;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = "produtos")
 public class Produto {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+
+	private Long codigo;
 	private String nome;
 	private BigDecimal valor;
 	
 	
 	
 	public Long getId() {
-		return id;
+		return codigo;
 	}
-	public void setId(Long id) {
-		this.id = id;
+	public void setId(Long codigo) {
+		this.codigo = codigo;
 	}
 	public String getNome() {
 		return nome;

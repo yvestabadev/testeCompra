@@ -1,1 +1,0 @@
-INSERT INTO produtos(nome, valor) values ('Honda Civic 2033', 279990.00);
