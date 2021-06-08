@@ -2,9 +2,14 @@ package br.com.akconsultor.compradeproduto.modelos;
 
 import java.math.BigDecimal;
 
+import javax.validation.constraints.NotNull;
+
 public class CondicaoPagamento {
 	
+	@NotNull 
 	private BigDecimal valorEntrada;
+	
+	@NotNull 
 	private Integer qtdeParcelas;
 	
 	

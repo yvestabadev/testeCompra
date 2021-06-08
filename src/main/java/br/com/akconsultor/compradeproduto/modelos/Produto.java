@@ -2,12 +2,17 @@ package br.com.akconsultor.compradeproduto.modelos;
 
 import java.math.BigDecimal;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 
 public class Produto {
 	
-
+	@NotNull 
 	private Long codigo;
+	@NotNull @NotEmpty
 	private String nome;
+	@NotNull 
 	private BigDecimal valor;
 	
 	
