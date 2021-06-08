@@ -1,10 +1,9 @@
 package br.com.akconsultor.compradeproduto.modelos;
 
 import java.math.BigDecimal;
-import java.text.NumberFormat;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class Compra {
 	
@@ -30,10 +29,11 @@ public class Compra {
 		Integer qtdeParcelas = condicaoPagamento.getQtdeParcelas();
 		
 		for(Integer i = 0; i < qtdeParcelas; i++) {
-			BigDecimal valorParcela = valorRestante.multiply(this.taxaJurosAoMes)
-			.divide(new BigDecimal(qtdeParcelas - i));
+			valorRestante = valorRestante.multiply(this.taxaJurosAoMes);
+			BigDecimal valorParcela = valorRestante
+			.divide(new BigDecimal(qtdeParcelas - i), 2, RoundingMode.HALF_EVEN);
 			
-			valorParcela = new BigDecimal(NumberFormat.getCurrencyInstance(Locale.US).format(valorParcela));
+			valorRestante = valorRestante.subtract(valorParcela);
 			
 			parcelas.add(new Parcela(i + 1, valorParcela, this.taxaJurosAoMes.subtract(new BigDecimal(1))));
 		}

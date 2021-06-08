@@ -12,10 +12,10 @@ public class Produto {
 	
 	
 	
-	public Long getId() {
+	public Long getCodigo() {
 		return codigo;
 	}
-	public void setId(Long codigo) {
+	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
 	}
 	public String getNome() {
