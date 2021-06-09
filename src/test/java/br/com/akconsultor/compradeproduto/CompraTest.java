@@ -32,7 +32,7 @@ class CompraTest {
 
 	@Test
 	void verSeQtdeDeParcelasEstaoCertas() {
-		Compra compra = new Compra(produto, condicaoDePagamento);
+		Compra compra = new Compra(produto, condicaoDePagamento, "0.0115");
 
 		List<Parcela> parcelas = compra.valorParcelas();
 
@@ -42,7 +42,7 @@ class CompraTest {
 	@Test
 	void valorDasParcelasSemJuros() {
 		this.condicaoDePagamento.setQtdeParcelas(2);
-		Compra compra = new Compra(produto, condicaoDePagamento);
+		Compra compra = new Compra(produto, condicaoDePagamento, "0.0115");
 
 		List<Parcela> parcelas = compra.valorParcelas();
 		
@@ -54,7 +54,7 @@ class CompraTest {
 	void valorDasParcelasComJuros() {
 		this.condicaoDePagamento.setQtdeParcelas(7);
 		
-		Compra compra = new Compra(produto, condicaoDePagamento);
+		Compra compra = new Compra(produto, condicaoDePagamento, "0.0115");
 
 		List<Parcela> parcelas = compra.valorParcelas();
 		

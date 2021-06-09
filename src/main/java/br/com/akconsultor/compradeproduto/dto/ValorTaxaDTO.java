@@ -1,9 +1,10 @@
 package br.com.akconsultor.compradeproduto.dto;
 
-public class ApiTaxaDto {
+public class ValorTaxaDTO {
 	
 	private String data;
 	private String valor;
+	
 	
 	public String getData() {
 		return data;
@@ -17,6 +18,7 @@ public class ApiTaxaDto {
 	public void setValor(String valor) {
 		this.valor = valor;
 	}
+	
 	
 
 }
