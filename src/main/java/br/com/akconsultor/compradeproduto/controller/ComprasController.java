@@ -15,11 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.akconsultor.compradeproduto.dto.CompraDTO;
 import br.com.akconsultor.compradeproduto.dto.ValorTaxaDTO;
 import br.com.akconsultor.compradeproduto.modelos.Compra;
-import br.com.akconsultor.compradeproduto.modelos.CondicaoPagamento;
 import br.com.akconsultor.compradeproduto.modelos.Parcela;
-import br.com.akconsultor.compradeproduto.modelos.Produto;
 import br.com.akconsultor.compradeproduto.service.ValorService;
 
 
@@ -34,19 +33,11 @@ public class ComprasController {
 	
 	@PostMapping
 	@ResponseBody
-	public List<Parcela> listaDeParcelas(@RequestBody @Valid Produto produto, @RequestBody @Valid CondicaoPagamento condicaoPagamento){
-		Compra compra = new Compra(produto, condicaoPagamento, valorService.getValorUnico().get(0).getValor());
+	public List<Parcela> listaDeParcelas(@RequestBody @Valid CompraDTO compraDTO){
+		Compra compra = new Compra(compraDTO.getProduto(), compraDTO.getCondicaoPagamento(), valorService.getValorUnico().get(0).getValor());
 		
 		return compra.valorParcelas();
 		
-	}
-	
-	@GetMapping
-	@ResponseBody
-	public List<ValorTaxaDTO> mostraCondicao() {
-		List<ValorTaxaDTO> taxa = valorService.getValorUnico();
-		
-		return taxa;
 	}
 	
 	@GetMapping("taxa/trintaDias")

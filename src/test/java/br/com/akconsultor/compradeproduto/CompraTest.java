@@ -21,7 +21,7 @@ class CompraTest {
 	@BeforeEach
 	void instanciaProdutoECondicao() {
 		this.produto = new Produto();
-		this.produto.setCodigo(1l);
+		this.produto.setCodigo(1);
 		this.produto.setNome("Honda Civic 2033");
 		this.produto.setValor(new BigDecimal("230000.00"));
 
