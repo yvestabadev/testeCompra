@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.akconsultor.compradeproduto.client.BCClient;
 import br.com.akconsultor.compradeproduto.dto.CompraDTO;
 import br.com.akconsultor.compradeproduto.dto.ValorTaxaDTO;
 import br.com.akconsultor.compradeproduto.modelos.Compra;
@@ -34,9 +35,9 @@ public class ComprasController {
 	@PostMapping
 	@ResponseBody
 	public List<Parcela> listaDeParcelas(@RequestBody @Valid CompraDTO compraDTO){
-		Compra compra = new Compra(compraDTO.getProduto(), compraDTO.getCondicaoPagamento(), valorService.getValorUnico().get(0).getValor());
 		
-		return compra.valorParcelas();
+		
+		return valorService.getValorParcela(compraDTO);
 		
 	}
 	
