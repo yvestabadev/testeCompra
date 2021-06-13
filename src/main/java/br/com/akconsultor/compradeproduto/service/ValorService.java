@@ -3,21 +3,32 @@ package br.com.akconsultor.compradeproduto.service;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import br.com.akconsultor.compradeproduto.client.BCClient;
+import br.com.akconsultor.compradeproduto.dto.CompraDTO;
 import br.com.akconsultor.compradeproduto.dto.ValorTaxaDTO;
+import br.com.akconsultor.compradeproduto.modelos.Compra;
+import br.com.akconsultor.compradeproduto.modelos.Parcela;
 
-@FeignClient(name = "feignValorService", url = "https://api.bcb.gov.br/")
-public interface ValorService {
-	
-	@GetMapping(value = "/dados/serie/bcdata.sgs.11/dados/ultimos/1?formato=json")
-	public List<ValorTaxaDTO> getValorUnico();
-	
-	@GetMapping(value = "/dados/serie/bcdata.sgs.11/dados?formato=json&dataInicial={dataInicial}&dataFinal={dataFinal}")
-	public List<ValorTaxaDTO> getPorData(@PathVariable @DateTimeFormat(pattern = "dd.MM.yyyy") LocalDateTime dataInicial,
-			@PathVariable @DateTimeFormat(pattern = "dd.MM.yyyy") LocalDateTime dataFinal);
+@Service
+public class ValorService {
+
+	@Autowired
+	BCClient bcClient;
+
+	public List<ValorTaxaDTO> getPorData(LocalDateTime dataInicial, LocalDateTime dataFinal) {
+
+		return bcClient.getPorData(dataInicial, dataFinal);
+	}
+
+	public List<Parcela> getValorParcela(@Valid CompraDTO compraDTO) {
+		Compra compra = new Compra(compraDTO.getProduto(), compraDTO.getCondicaoPagamento(), bcClient.getValorUnico().get(0).getValor());
+		
+		return  compra.valorParcelas();
+	}
 
 }
